@@ -1,0 +1,17 @@
+# magic-mirror
+#
+# Provides a server and frontend for a magic mirror
+
+[Service]
+ExecStart=/usr/bin/node $(npm root -g)/magic-mirror/server.js
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=magic-mirror
+User=pi
+Group=pi
+Environment=NODE_ENV=production
+Environment=MAGIC_MIRROR_CONFIG=/etc/default/magic-mirror
+
+[Install]
+WantedBy=multi-user.target

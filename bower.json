@@ -1,0 +1,25 @@
+{
+  "name": "magic-mirror",
+  "description": "An application for driving magic mirrors",
+  "main": "server.js",
+  "authors": [
+    "Josh Gachnang <josh@servercobra.com>"
+  ],
+  "license": "GPLv3",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation-sites": "~6.1.1",
+    "lodash": "~4.3.0",
+    "moment": "~2.11.2",
+    "angular-xml": "~2.2.1",
+    "weather-icons": "~2.0.10"
+  }
+}

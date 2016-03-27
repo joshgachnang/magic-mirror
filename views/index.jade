@@ -1,0 +1,47 @@
+html
+head
+  link(href='https://fonts.googleapis.com/css?family=Dosis:400,200,700', rel='stylesheet', type='text/css')
+  link(href='bower_components/angular-material/angular-material.css', rel='stylesheet')
+  link(href='bower_components/weather-icons/css/weather-icons.css', rel='stylesheet')
+  link(href='css/style.css', rel='stylesheet')
+  link(href='components/chicagoCTA/cta.css', rel='stylesheet')
+  link(href='components/clock/clock.css', rel='stylesheet')
+  link(href='components/forecastio/forecast.css', rel='stylesheet')
+body(ng-app='mirror')
+  page
+    .box.top.left
+      mirror-clock
+      google-calendars Loading google calendars..
+    .box.top.right
+      simple-forecast
+    .box.bottom.left
+      cta-train-schedule Loading train schedule..
+      uber-estimate Loading uber..
+    .box.bottom.center
+    .box.bottom.right
+      inspirational-quote Loading quote..
+  script(src='bower_components/lodash/dist/lodash.min.js')
+  script(src='bower_components/moment/moment.js')
+  script(src='bower_components/x2js/xml2json.min.js')
+  // Angular
+  script(src='bower_components/angular/angular.js')
+  script(src='bower_components/angular-animate/angular-animate.js')
+  script(src='bower_components/angular-aria/angular-aria.js')
+  script(src='bower_components/hammerjs/hammer.js')
+  script(src='bower_components/angular-resource/angular-resource.js')
+  script(src='bower_components/angular-material/angular-material.js')
+  script(src='bower_components/angular-xml/angular-xml.js')
+  script(src='bower_components/autobahnjs/autobahn.js')
+  // App
+  script(src='components/forecastio/forecastio.js')
+  script(src='config.js')
+  //script.
+    //angular.module("config", []).constant("LATITUDE", "!{config.LATITUDE}").constant("LONGITUDE", "!{config.LONGITUDE}").constant("FORECASTIO_KEY", "!{config.FORECASTIO_KEY}")
+  script(src='js/app.js')
+  script(src='components/googleCalendar/calendar.service.js')
+  script(src='components/clock/clock.js')
+  script(src='components/quote/quote.js')
+  script(src='components/uber/uber.js')
+  script(src='components/googleCalendar/calendar.component.js')
+  script(src='components/chicagoCTA/cta.service.js')
+  script(src='components/chicagoCTA/cta.component.js')
