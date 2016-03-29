@@ -7,7 +7,7 @@ fi
 
 # Install the init file
 echo "Installing init script at /etc/systemd/system/magic-mirror.service"
-cp raspian.init /etc/systemd/system/magic-mirror.service
+cp magic-mirror.service /etc/systemd/system/magic-mirror.service
 chown root:root /etc/systemd/system/magic-mirror.service
 chmod 755 /etc/systemd/system/magic-mirror.service
 
