@@ -3,7 +3,7 @@
 # Provides a server and frontend for a magic mirror
 
 [Service]
-ExecStart=/usr/bin/node $(npm root -g)/magic-mirror/server.js
+ExecStart=/usr/bin/node server.js
 Restart=always
 StandardOutput=syslog
 StandardError=syslog
@@ -12,6 +12,7 @@ User=pi
 Group=pi
 Environment=NODE_ENV=production
 Environment=MAGIC_MIRROR_CONFIG=/etc/default/magic-mirror
+WorkingDirectory=/usr/lib/node_modules/magic-mirror
 
 [Install]
 WantedBy=multi-user.target
