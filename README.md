@@ -25,7 +25,7 @@ and the Chromium browser. Here's a few links to get you started:
 
 [Install Raspbian](https://www.andrewmunsell.com/blog/getting-started-raspberry-pi-install-raspbian/)
 
-[Install Chromium 48 on Raspian Jessie] (https://www.raspberrypi.org/forums/viewtopic.php?t=121195https://www.raspberrypi.org/forums/viewtopic.php?t=121195https://www.raspberrypi.org/forums/viewtopic.php?t=121195https://www.raspberrypi.org/forums/viewtopic.php?t=121195https://www.raspberrypi.org/forums/viewtopic.php?t=121195)
+[Install Chromium 48 on Raspian Jessie] (https://www.raspberrypi.org/forums/viewtopic.php?t=121195)
 
 Now, you'll need to install the Node package manager, npm, as root:
 
