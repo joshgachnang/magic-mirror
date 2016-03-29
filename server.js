@@ -7,10 +7,8 @@ var calendar = require('./components/googleCalendar/googleCalendar');
 var config;
 if (process.env.MAGIC_MIRROR_CONFIG) {
   config = require(process.env.MAGIC_MIRROR_CONFIG);
-
 } else {
   config = require('./config.js');
-
 }
 
 var uber = new Uber({
@@ -52,7 +50,7 @@ function updateTrainSchedule() {
     for (schedule of res) {
       trainArrivals.push(cta.train.arrivals.toETA(schedule));
     }
-    console.log("Updating CTA schedule", trainArrivals);
+    console.log("Updating CTA schedule");
   });
 
 }

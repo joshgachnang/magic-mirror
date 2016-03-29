@@ -15,7 +15,7 @@ chmod 755 /etc/systemd/system/magic-mirror.service
 echo "Installing config file at /etc/default/magic-mirror"
 cp ../config.example.js /etc/default/magic-mirror
 chown root:root /etc/default/magic-mirror
-chmod 644 /etc/default/magic-mirror
+chmod 600 /etc/default/magic-mirror
 
 # Start the service
 systemctl enable magic-mirror

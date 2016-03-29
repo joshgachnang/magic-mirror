@@ -3,6 +3,13 @@ var readline = require('readline');
 var google = require('googleapis');
 var googleAuth = require('google-auth-library');
 
+var config;
+if (process.env.MAGIC_MIRROR_CONFIG) {
+  config = require(process.env.MAGIC_MIRROR_CONFIG);
+} else {
+  config = require('../../config.js');
+}
+
 // If modifying these scopes, delete your previously saved credentials
 // at ~/.credentials/calendar-nodejs-quickstart.json
 var SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
@@ -11,16 +18,13 @@ var TOKEN_PATH = TOKEN_DIR + 'google-calendar-tokens.json';
 
 var allEvents = [];
 
-// Load client secrets from a local file.
-fs.readFile('client_secret.json', function processClientSecrets(err, content) {
-  if (err) {
-    console.log('Error loading client secret file: ' + err);
-    return;
-  }
-  // Authorize a client with the loaded credentials, then call the
-  // Google Calendar API.
-  authorize(JSON.parse(content), listEvents);
-});
+if (config.GOOGLE_CALENDAR_CLIENT_SECRET === undefined ||
+    config.GOOGLE_CALENDAR_CLIENT_SECRET.installed === undefined) {
+  console.log("Please configure GOOGLE_CALENDAR_CLIENT_SECRET in your config file.");
+  return
+}
+
+authorize(config.GOOGLE_CALENDAR_CLIENT_SECRET, listEvents);
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the

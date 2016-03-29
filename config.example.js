@@ -8,6 +8,7 @@ module.exports = {
   CTA_TRAIN_API_KEY: '',
   CTA_TRAIN_MAP_ID: '41320',
   FORECASTIO_KEY: '',
+  GOOGLE_CALENDAR_CLIENT_SECRET: {},
   QUOTES: [
     "Look at that sexy dude!",
     "Woah, stylin' today",
