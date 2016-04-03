@@ -4,7 +4,7 @@ angular.module('mirror')
     .directive('uberEstimate', function ($http, $interval) {
       return {
         restrict: 'E',
-        templateUrl: 'components/uber/uber.html',
+        templateUrl: 'uber/uber.html',
         link: function ($scope) {
 
           function refreshUber() {

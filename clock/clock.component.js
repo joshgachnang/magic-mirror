@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('mirror')
-    .directive('mirrorClock', function ($interval) {
+    .directive('clockSimple', function ($interval) {
       return {
         restrict: 'E',
-        templateUrl: 'components/clock/clock.html',
+        templateUrl: 'clock/clock.html',
         link: function ($scope) {
           $scope.date = new Date();
           $scope.days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];

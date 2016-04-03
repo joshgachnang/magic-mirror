@@ -1,8 +1,6 @@
+"use strict";
 var express = require('express');
-var cta = require("./cta-node");
-var Uber = require('node-uber');
-
-var calendar = require('./components/googleCalendar/googleCalendar');
+var _ = require('underscore');
 
 var config;
 if (process.env.MAGIC_MIRROR_CONFIG) {
@@ -11,66 +9,77 @@ if (process.env.MAGIC_MIRROR_CONFIG) {
   config = require('./config.js');
 }
 
-var uber = new Uber({
-  client_id: config.UBER_CLIENT_ID,
-  client_secret: config.UBER_CLIENT_SECRET,
-  server_token: config.UBER_SERVER_TOKEN,
-  name: config.UBER_APP_NAME
-});
+var frontendConfigKeys = [];
+var frontendScripts = [];
+var frontendStyles = [];
+var directives = [];
 
 var app = express();
 
-var uberEstimate = {};
-
-function updateUberEstimate() {
-  // TODO: support oauth, use this to get surge
-  uber.estimates.time({
-    start_latitude: config.LATITUDE, start_longitude: config.LONGITUDE
-  }, function (err, res) {
-    if (err) {
-      console.error(err);
-    } else {
-      //console.log(res);
-      uberEstimate = res;
-    }
-  });
-}
-
-setInterval(updateUberEstimate, 5 * 60 * 1000);
-updateUberEstimate();
-
-cta.init({trainApiKey: config.CTA_TRAIN_API_KEY});
-
-var trainArrivals = [];
-
-function updateTrainSchedule() {
-  trainArrivals = [];
-  var sched = cta.train.arrivals.byMapId(config.CTA_TRAIN_MAP_ID);
-  sched.then(function (res) {
-    for (schedule of res) {
-      trainArrivals.push(cta.train.arrivals.toETA(schedule));
-    }
-    console.log("Updating CTA schedule");
-  });
-
-}
-
-setInterval(updateTrainSchedule, 60 * 1000);
-updateTrainSchedule();
-
 app.get('/', function (req, res) {
   "use strict";
-  res.render("index.jade", {config: config});
+  res.render("index.jade", {
+    config: config,
+    scripts: frontendScripts,
+    stylesheets: frontendStyles
+  });
 });
+
+// Init modules
+for (let name of config.MODULES) {
+  let mod = require(name);
+
+  if (mod.init) {
+    // If mod.init returns false, don't load the rest
+    if (mod.init(config) === false) {
+      console.log("Module returned false on init, skipping: ", name);
+      continue;
+    }
+  }
+
+  // Allow the module to add routes
+  if (mod.routes) {
+    app = mod.routes(app);
+  }
+
+  // Expose some of the config keys to the frontend
+  if (mod.frontendConfig) {
+    frontendConfigKeys = frontendConfigKeys.concat(mod.frontendConfig(config));
+  }
+
+  // Allow modules to add frontend scripts
+  if (mod.scripts) {
+    frontendScripts = frontendScripts.concat(mod.scripts);
+  }
+
+  // Allow modules to add frontend stylesheets
+  if (mod.stylesheets) {
+    frontendStyles = frontendStyles.concat(mod.stylesheets);
+  }
+
+  // Modules export Angular directives. Only allow those in the layout if the
+  // module is initialize properly
+  if (mod.directives) {
+    directives = directives.concat(mod.directives);
+  }
+}
+
+// Filter directives out of layout that aren't configured correctly
+_.each(Object.keys(config.LAYOUT), function (key) {
+  console.log('config lyaout key', key, config.LAYOUT[key])
+  config.LAYOUT[key] = _.filter(config.LAYOUT[key], function (directive) {
+    console.log("Filtering", directive, directives, directives.indexOf(directive))
+    return directives.indexOf(directive) > -1
+  });
+  console.log('INTERMEDIATE LAYOUT', config.LAYOUT)
+});
+
+console.log('FINAL LAYOUT', config.LAYOUT);
 
 app.get('/config.js', function (req, res) {
   "use strict";
   let base = 'angular.module("config", [])';
-  [
-    "LATITUDE",
-    "LONGITUDE",
-    "FORECASTIO_KEY"
-  ].forEach(function (key) {
+  frontendConfigKeys.forEach(function (key) {
     let val = config[key];
     console.log(key, val);
     base = base.concat(`.constant("${key}", "${val}")`);
@@ -78,26 +87,6 @@ app.get('/config.js', function (req, res) {
   res.header("Content-Type", "application/javascript");
   res.write(base);
   res.end();
-});
-
-app.get('/uber', function (req, res) {
-  res.json(uberEstimate);
-});
-
-app.get('/calendars', function (req, res) {
-  res.json(calendar.calendars);
-});
-
-app.get('/ctaArrivals', function (req, res) {
-  res.json(trainArrivals);
-});
-
-app.get('/register/uber', function (req, res) {
-  res.send(uber.getAuthorizeUrl(['request']));
-});
-
-app.get('/quotes', function (req, res) {
-  res.send(config.QUOTES)
 });
 
 // If it matches none of the above routes, check static files

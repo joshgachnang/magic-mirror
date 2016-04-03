@@ -19,7 +19,12 @@
     "foundation-sites": "~6.1.1",
     "lodash": "~4.3.0",
     "moment": "~2.11.2",
-    "angular-xml": "~2.2.1",
-    "weather-icons": "~2.0.10"
+    "weather-icons": "~2.0.10",
+    "angular": "angularjs#~1.5.3",
+    "angular-resource": "~1.5.3"
+  },
+  "resolutions": {
+    "angular": "~1.5.3",
+    "angular-resource": "~1.5.3"
   }
 }

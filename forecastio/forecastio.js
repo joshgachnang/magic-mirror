@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('forecastio', ['ngResource'])
+angular.module('mirror')
     .factory('Weather', function ($q, $resource, $http, FORECASTIO_KEY) {
         var url = 'https://api.forecast.io/forecast/' + FORECASTIO_KEY + '/';
 
@@ -34,12 +34,12 @@ angular.module('forecastio', ['ngResource'])
             }
         }
     })
-    .directive('simpleForecast', function (Weather, LATITUDE, LONGITUDE) {
+    .directive('forecastioSimple', function (Weather, LATITUDE, LONGITUDE) {
         "use strict";
 
         return {
             restrict: 'E',
-            templateUrl: 'components/forecastio/simple_forecast.html',
+            templateUrl: 'forecastio/simple_forecast.html',
             link: function ($scope) {
                 Weather.getWeather(LATITUDE, LONGITUDE).then(function(result) {
                     $scope.weather = result;
@@ -51,7 +51,7 @@ angular.module('forecastio', ['ngResource'])
     .directive('weatherIcon', function () {
         return {
             restrict: 'AEC',
-            templateUrl: 'components/forecastio/weather_icon.html',
+            templateUrl: 'forecastio/weather_icon.html',
             scope: {
                 icon: '=',
                 timeOfDay: '='

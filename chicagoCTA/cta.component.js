@@ -2,7 +2,7 @@ angular.module('mirror')
     .directive('ctaTrainSchedule', function (CTATrain) {
       return {
         restrict: 'E',
-        templateUrl: 'components/chicagoCTA/cta.html',
+        templateUrl: 'chicagoCTA/cta.html',
         link: function ($scope) {
           $scope.arrivals = CTATrain.arrivals;
         }

@@ -2,7 +2,7 @@ angular.module('mirror')
     .directive('inspirationalQuote', function ($interval, $http) {
       return {
         restrict: 'E',
-        templateUrl: 'components/quote/quote.html',
+        templateUrl: 'quote/quote.html',
         link: function ($scope) {
 
           function pickQuote() {

@@ -7,7 +7,7 @@ var config;
 if (process.env.MAGIC_MIRROR_CONFIG) {
   config = require(process.env.MAGIC_MIRROR_CONFIG);
 } else {
-  config = require('../../config.js');
+  config = require('../config.js');
 }
 
 // If modifying these scopes, delete your previously saved credentials

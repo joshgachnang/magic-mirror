@@ -1,5 +1,5 @@
 var app = angular.module('mirror',
-    ['forecastio', 'xml', 'config'])
+    ['ngResource', 'config'])
     .filter('pad', function () {
       return function (num) {
         return (num < 10 ? '0' + num : num);

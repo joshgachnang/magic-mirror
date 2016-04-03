@@ -1,4 +1,12 @@
 module.exports = {
+  MODULES: [
+      "./chicagoCTA",
+      "./clock",
+      "./forecastio",
+      "./googleCalendar",
+      "./quote",
+      "./uber"
+  ],
   UBER_CLIENT_ID: '',
   UBER_CLIENT_SECRET: '',
   UBER_SERVER_TOKEN: '',
@@ -17,6 +25,21 @@ module.exports = {
     "You are having a great hair day",
     "I'm jealous of that shirt",
     "Go kick some ass today!",
-    "Who's bird is that? That's Josh Gachnang's bird."
-  ]
+  ],
+  LAYOUT: {
+    topLeft: [
+      "clock-simple",
+      "google-calendar"
+    ],
+    topRight: [
+      "forecastio-simple"
+    ],
+    bottomLeft: [
+      "cta-train-schedule",
+      "uber-estimate"
+    ],
+    bottomRight: [
+      "inspirational-quote"
+    ]
+  }
 };

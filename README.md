@@ -25,7 +25,7 @@ and the Chromium browser. Here's a few links to get you started:
 
 [Install Raspbian](https://www.andrewmunsell.com/blog/getting-started-raspberry-pi-install-raspbian/)
 
-[Install Chromium 48 on Raspian Jessie] (https://www.raspberrypi.org/forums/viewtopic.php?t=121195)
+[Install Chromium 48 on Raspian Jessie](https://www.raspberrypi.org/forums/viewtopic.php?t=121195)
 
 Now, you'll need to install the Node package manager, npm, as root:
 
@@ -49,6 +49,28 @@ a few services to use all the features. Once you have configured all the keys,
 restart the mirror API:
 
       systemctl restart magic-mirror
+
+### Layout
+
+The `LAYOUT` config key controls where each module is rendered on the screen.
+The screen is split up into 4 areas: "topLeft", "topRight", "bottomLeft",
+"bottomRight". Each module exports one or more Angular directives (see their
+documentation to get a list). Simply add each directive to one of the areas
+and it will be rendered on the mirror.
+
+The current supported directives:
+
+* clock-simple
+
+* google-calendar
+
+* forecastio-simple
+
+* cta-train-schedule
+
+* uber-estimate
+
+* inspirational-quote
 
 ### Forecast.io
 

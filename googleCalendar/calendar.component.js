@@ -3,10 +3,10 @@
 var weekDaysShort = ["Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat"];
 
 angular.module('mirror')
-    .directive('googleCalendars', function (Calendar) {
+    .directive('googleCalendar', function (Calendar) {
       return {
         restrict: 'E',
-        templateUrl: 'components/googleCalendar/calendars.html',
+        templateUrl: 'googleCalendar/calendars.html',
         link: function ($scope) {
           $scope.calendars = Calendar.calendars;
         }
