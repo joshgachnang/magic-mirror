@@ -2,7 +2,7 @@
   "name": "magic-mirror",
   "description": "The frontend and backend for running a magic mirror, written in Angular2 and NodeJS",
   "repository": "https://github.com/pcsforeducation/magic-mirror",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "license": "GPL-3.0",
   "scripts": {
     "start": "nodemon server.js",

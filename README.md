@@ -25,7 +25,7 @@ and the Chromium browser. Here's a few links to get you started:
 
 [Install Raspbian](https://www.andrewmunsell.com/blog/getting-started-raspberry-pi-install-raspbian/)
 
-[Install Chromium 48 on Raspian Jessie](https://www.raspberrypi.org/forums/viewtopic.php?t=121195)
+[Install Chromium on Raspian Jessie](https://www.raspberrypi.org/forums/viewtopic.php?t=121195)
 
 Now, you'll need to install the Node package manager, npm, as root:
 
@@ -49,6 +49,26 @@ a few services to use all the features. Once you have configured all the keys,
 restart the mirror API:
 
       systemctl restart magic-mirror
+
+Make Chromium Start On Boot
+---------------------------
+
+If you want Chromium to start up full screen mode as soon as the Pi boots:
+
+    sudo mkdir -p ~/.config/autostart
+
+    sudo nano ~/.config/autostart/autoChromium.desktop
+
+And add the following:
+
+    [Desktop Entry]
+    Type=Application
+    Exec=/usr/bin/chromium-browser --noerrdialogs --disable-session-crashed-bubble --disable-infobars --kiosk http://www.website.com
+    Hidden=false
+    X-GNOME-Autostart-enabled=true
+    Name[en_US]=AutoChromium
+    Name=AutoChromium
+    Comment=Start Chromium when GNOME starts
 
 ### Layout
 
