@@ -17,6 +17,25 @@ Feel free to add more functionality and submit a pull request!
 
 Inspired by Michael Teeuw's [magic mirror post](http://michaelteeuw.nl/tagged/magicmirror).
 
+Development
+-----------
+
+Install dependencies:
+
+    npm install
+    
+    bower install
+    
+Copy the example config
+
+    cp config.example.js config.js
+
+Run the dev server:
+
+    npm start
+
+The server should be available at localhost:4000
+
 Installation
 ------------
 

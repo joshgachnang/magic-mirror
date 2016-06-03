@@ -5,3 +5,7 @@
 .clock h2 {
     font-size: 300%;
 }
+
+.clock {
+    padding-left: 20px;
+}
