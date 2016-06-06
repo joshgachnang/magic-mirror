@@ -7,16 +7,33 @@ let reasons = [];
 
 const updateReasonSober = function() {
   console.log('Updating reason sober');
+  // var options = {
+  //   url: config.TRIGGR_API_URL + '/reasonSober?status=approved',
+  //   headers: {
+  //     'X-Triggr-Internal': config.TRIGGR_API_KEY
+  //   }
+  // };
+  // TODO: revert when https://github.com/triggr/triggr_api/pull/454 merges
   var options = {
-    url: config.TRIGGR_API_URL + '/reasonSober?status=approved',
+    url: config.TRIGGR_API_URL + '/reasonSober',
     headers: {
       'X-Triggr-Internal': config.TRIGGR_API_KEY
     }
   };
 
   function callback(error, response, body) {
+    console.log('reason sober CB', error, body);
     if (!error && response.statusCode == 200) {
-      reasons = JSON.parse(body);
+      reasons = [];
+
+      // TODO: remove when https://github.com/triggr/triggr_api/pull/454 merges
+      let allReasons = JSON.parse(body);
+      allReasons.forEach((reason) => {
+        if (reason.status && reason.status == 'approved') {
+          reasons.push(reason);
+        }
+      });
+
       console.log('Updated reason sober, found', reasons.length, 'reasons.');
     }
   }

@@ -66,7 +66,6 @@ for (let name of config.MODULES) {
 
 // Filter directives out of layout that aren't configured correctly
 _.each(Object.keys(config.LAYOUT), function (key) {
-  console.log('config lyaout key', key, config.LAYOUT[key])
   config.LAYOUT[key] = _.filter(config.LAYOUT[key], function (directive) {
     return directives.indexOf(directive) > -1
   });
