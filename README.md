@@ -153,3 +153,5 @@ The current supported directives:
 
 * [Find your StopID here](http://www.transitchicago.com/developers/ttdocs/default.aspx#locations)
   and fill it in for `CTA_TRAIN_MAP_ID`
+
+* This relies on your timezone being set to US Central. To set your time zone, run `sudo raspi-config`, select 'Internationalization options', 'Change Time Zone', then 'US', then 'Central'.
