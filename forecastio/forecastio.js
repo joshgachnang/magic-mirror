@@ -49,7 +49,7 @@ angular.module('mirror')
                 }
 
                 // Update weather every 15 mins
-                $interval(updateWeather(), 5 * 60 * 1000);
+                $interval(updateWeather, 15* 60 * 1000);
                 updateWeather();
             }
         };
