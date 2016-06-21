@@ -5,11 +5,11 @@ angular.module('mirror')
         var url = 'https://api.forecast.io/forecast/' + FORECASTIO_KEY + '/';
 
         var weatherResource = $resource(url, {
-            callback: 'JSON_CALLBACK'
+          callback: 'JSON_CALLBACK'
         }, {
-            get: {
-                method: 'JSONP'
-            }
+          get: {
+            method: 'JSONP'
+          }
         });
 
         return {

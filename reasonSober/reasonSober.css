@@ -4,5 +4,12 @@
 }
 
 .reasons-sober h3 {
-    margin-bottom: 5px;
+    margin-bottom: 15px;
+    font-size: 56px;
+}
+
+.reason-sober {
+    padding-bottom: 20px;
+    font-size: 36px;
+    line-height: 1;
 }

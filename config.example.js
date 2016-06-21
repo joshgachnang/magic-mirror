@@ -34,6 +34,7 @@ module.exports = {
       "cta-train-schedule",
       "uber-estimate"
     ],
+    topCenter: [],
     topRight: [
       "forecastio-simple",
       "google-calendar"
@@ -41,6 +42,7 @@ module.exports = {
     bottomLeft: [
       "reason-sober"
     ],
+    bottomCenter: [],
     bottomRight: [
       "inspirational-quote"
     ]
