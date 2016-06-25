@@ -36,7 +36,7 @@ angular.module('mirror')
           }
 
           // Pick new reasons every 5 mins
-          $interval(pickReasons(), 5 * 60 * 1000);
+          $interval(pickReasons, 5 * 60 * 1000);
           pickReasons();
         }
       }
