@@ -38,7 +38,7 @@ Now, you'll need to install the Node package manager, npm, as root:
 Now, install Magic Mirror (still as root). This is going to install some config
 files and an init script. 
   
-    npm install -g magic-mirror
+    sudo npm install -g magic-mirror
 
 
 Config
