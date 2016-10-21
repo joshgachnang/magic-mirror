@@ -5,11 +5,11 @@ angular.module('mirror')
         var url = 'https://api.forecast.io/forecast/' + FORECASTIO_KEY + '/';
 
         var weatherResource = $resource(url, {
-            callback: 'JSON_CALLBACK'
+          callback: 'JSON_CALLBACK'
         }, {
-            get: {
-                method: 'JSONP'
-            }
+          get: {
+            method: 'JSONP'
+          }
         });
 
         return {
@@ -34,17 +34,23 @@ angular.module('mirror')
             }
         }
     })
-    .directive('forecastioSimple', function (Weather, LATITUDE, LONGITUDE) {
+    .directive('forecastioSimple', function (Weather, LATITUDE, LONGITUDE, $interval) {
         "use strict";
 
         return {
             restrict: 'E',
             templateUrl: 'forecastio/simple_forecast.html',
             link: function ($scope) {
-                Weather.getWeather(LATITUDE, LONGITUDE).then(function(result) {
-                    $scope.weather = result;
-                    $scope.forecasts = result.daily.data;
-                });
+                function updateWeather() {
+                    Weather.getWeather(LATITUDE, LONGITUDE).then(function(result) {
+                        $scope.weather = result;
+                        $scope.forecasts = result.daily.data;
+                    });
+                }
+
+                // Update weather every 15 mins
+                $interval(updateWeather, 15* 60 * 1000);
+                updateWeather();
             }
         };
     })

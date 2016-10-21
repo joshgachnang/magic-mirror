@@ -24,20 +24,25 @@ module.exports = {
     "Such sexy, much handsome, wow",
     "You are having a great hair day",
     "I'm jealous of that shirt",
-    "Go kick some ass today!",
+    "Go kick some ass today!"
   ],
+  TRIGGR_API_URL: 'http://localhost:1337/api/v1',
+  TRIGGR_API_KEY: '',
   LAYOUT: {
     topLeft: [
       "clock-simple",
-      "google-calendar"
-    ],
-    topRight: [
-      "forecastio-simple"
-    ],
-    bottomLeft: [
       "cta-train-schedule",
       "uber-estimate"
     ],
+    topCenter: [],
+    topRight: [
+      "forecastio-simple",
+      "google-calendar"
+    ],
+    bottomLeft: [
+      "reason-sober"
+    ],
+    bottomCenter: [],
     bottomRight: [
       "inspirational-quote"
     ]

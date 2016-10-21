@@ -14,7 +14,6 @@ angular.module('mirror')
         var now = moment();
         var datetime = moment(input, "YYYYMMDD HH:mm:ss");
         var until = Math.floor(datetime.diff(now) / (60 * 1000));
-        console.log("FILTER", now, datetime, until)
         if (until <= 0) {
           return "Now";
         } else {

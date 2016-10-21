@@ -66,12 +66,9 @@ for (let name of config.MODULES) {
 
 // Filter directives out of layout that aren't configured correctly
 _.each(Object.keys(config.LAYOUT), function (key) {
-  console.log('config lyaout key', key, config.LAYOUT[key])
   config.LAYOUT[key] = _.filter(config.LAYOUT[key], function (directive) {
-    console.log("Filtering", directive, directives, directives.indexOf(directive))
     return directives.indexOf(directive) > -1
   });
-  console.log('INTERMEDIATE LAYOUT', config.LAYOUT)
 });
 
 console.log('FINAL LAYOUT', config.LAYOUT);
@@ -92,4 +89,4 @@ app.get('/config.js', function (req, res) {
 // If it matches none of the above routes, check static files
 app.use(express.static('.'));
 
-app.listen(3000);
+app.listen(4000);
