@@ -31,7 +31,7 @@ angular.module('mirror')
               url: '/reasonSober'
             }).then(function successCallback(response) {
               let reasons = shuffle(response.data);
-              $scope.reasons = reasons.slice(0, 3);
+              $scope.reasons = reasons.slice(0, 5);
             });
           }
 
