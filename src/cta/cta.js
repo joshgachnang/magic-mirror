@@ -14,10 +14,10 @@ export class CTA extends Component {
     let body = await res.json();
     let trains = {};
     for (let train of body.trains) {
-      if (!trains[train.stopDescription]) {
-        trains[train.stopDescription] = [];
+      if (!trains[train.route + train.stopDescription]) {
+        trains[train.route + train.stopDescription] = [];
       }
-      trains[train.stopDescription].push(train);
+      trains[train.route + train.stopDescription].push(train);
     }
     this.setState({ trains });
   }
@@ -49,7 +49,9 @@ export class CTA extends Component {
   render() {
     return (
       <div className="cta">
-        {Object.keys(this.state.trains).map(dest => this.renderTrain(dest))}
+        {Object.keys(this.state.trains)
+          .sort()
+          .map(dest => this.renderTrain(dest))}
       </div>
     );
   }
