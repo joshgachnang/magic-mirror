@@ -11,6 +11,7 @@
 .forecast .summary {
   font-size: 24px;
   font-weight: normal;
+  letter-spacing: -1px;
 }
 
 .forecast .icon {
