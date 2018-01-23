@@ -1,8 +1,9 @@
 {
-  "name": "mirror",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
+  "name": "magic-mirror",
+  "version": "1.0.1",
+  "description": "The frontend for running a magic mirror, written in React",
+  "private": false,
+  "devDependencies": {
     "moment": "^2.20.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -13,6 +14,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "publish:pre": "rm magic-mirror-*.tgz && npm run build && npm pack",
+    "publish": "npm run publish:pre && npm publish magic-mirror-*.tgz"
   }
 }
