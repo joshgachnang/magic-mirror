@@ -9,7 +9,7 @@ import { Calendar } from "./calendar/calendar";
 const API_URL = "http://localhost:8080/";
 
 // TODO: fetch from API
-const layout = {
+const defaultLayout = {
   topLeft: ["Clock", "Quote"],
   topRight: ["Forecast"],
   bottomLeft: ["CTA"],
@@ -25,7 +25,42 @@ const Components = {
 };
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = { layout: {} };
+  }
+
+  componentDidMount() {
+    this.updateLayout();
+    setTimeout(this.updateLayout.bind(this), 60 * 1000);
+  }
+
+  async updateLayout() {
+    let layout;
+    let apiUrl = API_URL + "mirror/layout";
+    if (window.location.search) {
+      apiUrl += `${window.location.search}`;
+    }
+    try {
+      let resp = await fetch(apiUrl);
+      let body = await resp.json();
+      layout = body.layout;
+      console.info("[Using layout from server:", layout);
+    } catch (e) {
+      layout = defaultLayout;
+      console.info(
+        "Could not fetch layout from server, using default:",
+        defaultLayout
+      );
+    }
+    this.setState({ layout });
+  }
+
   renderStringsToComponent(strings) {
+    if (!strings) {
+      return null;
+    }
+
     let componentList = strings.map(s => {
       let Component = Components[s];
       return <Component key={s} apiUrl={API_URL} />;
@@ -37,20 +72,20 @@ class App extends Component {
     return (
       <div className="App">
         <div className="topLeft">
-          {this.renderStringsToComponent(layout.topLeft)}
+          {this.renderStringsToComponent(this.state.layout.topLeft)}
         </div>
         <div className="topRight">
-          {this.renderStringsToComponent(layout.topRight)}
+          {this.renderStringsToComponent(this.state.layout.topRight)}
         </div>
 
         <div className="bottomLeft">
           <div className="bottom">
-            {this.renderStringsToComponent(layout.bottomLeft)}
+            {this.renderStringsToComponent(this.state.layout.bottomLeft)}
           </div>
         </div>
         <div className="bottomRight">
           <div className="bottom">
-            {this.renderStringsToComponent(layout.bottomRight)}
+            {this.renderStringsToComponent(this.state.layout.bottomRight)}
           </div>
         </div>
       </div>
