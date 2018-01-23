@@ -1,0 +1,44 @@
+.schedule {
+  margin-bottom: 2px;
+  width: 100%;
+}
+
+.route {
+  display: inline-block;
+  width: 38%;
+  padding-left: 2%;
+}
+
+.arrivals {
+  display: inline-block;
+  width: 60%;
+}
+
+.Brn {
+  background-color: #62361b;
+}
+
+.Red {
+  background-color: #c60c30;
+}
+
+.Blue {
+  background-color: #00a1de;
+}
+
+.G {
+  background-color: #009b3a;
+}
+.Org {
+  background-color: #f9461c;
+}
+.P,
+.Pexp {
+  background-color: #522398;
+}
+.Pink {
+  background-color: #e27ea6;
+}
+.Y {
+  background-color: #f9e300;
+}

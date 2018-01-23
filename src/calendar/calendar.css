@@ -1,0 +1,24 @@
+.calendar {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.calendar .event {
+  flex: 1;
+  display: flex;
+}
+
+.calendar .event .time {
+  width: 47%;
+  flex: 1;
+  text-align: right;
+  padding-right: 15px;
+}
+
+.calendar .event .description {
+  flex: 1;
+  display: tablee;
+  text-align: left;
+}

@@ -1,0 +1,50 @@
+.forecast {
+  width: 50%;
+  margin-left: 50%;
+}
+
+.forecast .today {
+  font-size: 64px;
+  font-weight: bold;
+}
+
+.forecast .summary {
+  font-size: 24px;
+  font-weight: normal;
+  letter-spacing: -1px;
+}
+
+.forecast .icon {
+  float: right;
+}
+
+.forecast .future {
+  margin-top: 5px;
+}
+
+.forecast .future .wi {
+  float: right;
+  margin-left: 10px;
+  width: 45px;
+  text-align: center;
+  display: block;
+  margin-top: 5px;
+}
+
+.forecast .future .high,
+.forecast .future .low {
+  display: inline-block;
+  font-weight: 500;
+}
+
+.forecast .future .date {
+  display: inline-block;
+  width: 60px;
+  margin-right: 10px;
+}
+
+.forecast .future .temperature {
+  width: 100px;
+  text-align: center;
+  display: inline-block;
+}
