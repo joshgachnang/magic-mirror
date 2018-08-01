@@ -1,5 +1,7 @@
 # Magic Mirror
 
+![](https://i.imgur.com/aCB9mTo.jpg)
+
 This is a client for running a magic mirror display. It uses React on the frontend to run the mirror itself. The backend is controlled by a [chatbot framework](http://github.com/pcsforeducation/val) written in NodeJS.
 
 Magic-Mirror has a few modules currently:
