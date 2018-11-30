@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import * as moment from "moment";
+import { getApiUrl } from "../utils";
 import "./cta.css";
 
 export class CTA extends Component {
@@ -10,7 +11,7 @@ export class CTA extends Component {
   }
 
   async updateSchedule() {
-    let res = await fetch(this.props.apiUrl + "cta");
+    let res = await fetch(getApiUrl("cta"));
     let body = await res.json();
     let trains = {};
     for (let train of body.trains) {

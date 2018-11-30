@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { getApiUrl } from "../utils";
 
 function pickRandom(list) {
   return list[Math.floor(Math.random() * list.length)];
@@ -12,7 +13,7 @@ export class Quote extends Component {
   }
 
   async updateQuotes() {
-    let res = await fetch(this.props.apiUrl + "inspirationalQuote");
+    let res = await fetch(getApiUrl("inspirationalQuote"));
     let body = await res.json();
     this.setState({ quotes: body.quotes, quote: pickRandom(body.quotes) });
   }

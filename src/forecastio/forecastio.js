@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import * as moment from "moment";
 import "./forecastio.css";
 import "./weather-icons.min.css";
+import { getApiUrl } from "../utils";
 
 function pickRandom(list) {
   return list[Math.floor(Math.random() * list.length)];
@@ -15,7 +16,7 @@ export class Forecast extends Component {
   }
 
   async updateForecast() {
-    let res = await fetch(this.props.apiUrl + "forecastio");
+    let res = await fetch(getApiUrl("forecastio"));
     let body = await res.json();
     this.setState({ forecast: body });
   }

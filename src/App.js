@@ -5,14 +5,14 @@ import { Quote } from "./quote/quote";
 import { CTA } from "./cta/cta";
 import { Forecast } from "./forecastio/forecastio";
 import { Calendar } from "./calendar/calendar";
-
-const API_URL = "http://localhost:8080/";
+import { getApiUrl } from "./utils";
 
 // TODO: fetch from API
 const defaultLayout = {
   topLeft: ["Clock", "Quote"],
   topRight: ["Forecast"],
-  bottomLeft: ["CTA"],
+  // bottomLeft: ["CTA"],
+  bottomLeft: [],
   bottomRight: ["Calendar"]
 };
 
@@ -37,7 +37,7 @@ class App extends Component {
 
   async updateLayout() {
     let layout;
-    let apiUrl = API_URL + "mirror/layout";
+    let apiUrl = getApiUrl("mirror/layout");
     if (window.location.search) {
       apiUrl += `${window.location.search}`;
     }
@@ -63,7 +63,7 @@ class App extends Component {
 
     let componentList = strings.map(s => {
       let Component = Components[s];
-      return <Component key={s} apiUrl={API_URL} />;
+      return <Component key={s} />;
     });
     return <div className="box">{componentList}</div>;
   }

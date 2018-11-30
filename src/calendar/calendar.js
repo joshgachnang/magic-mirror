@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import * as moment from "moment";
+import { getApiUrl } from "../utils";
 import "./calendar.css";
 
 export class Calendar extends Component {
@@ -10,7 +11,7 @@ export class Calendar extends Component {
   }
 
   async updateSchedule() {
-    let res = await fetch(this.props.apiUrl + "calendars");
+    let res = await fetch(getApiUrl("calendars"));
     let body = await res.json();
     this.setState({ events: body.events });
   }
