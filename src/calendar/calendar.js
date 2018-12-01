@@ -4,20 +4,17 @@ import { getApiUrl } from "../utils";
 import "./calendar.css";
 
 export class Calendar extends Component {
-  constructor() {
-    super();
-    this.state = { events: [] };
-    setInterval(() => this.updateSchedule.bind(this), 15000);
-  }
+  state = { events: [] };
 
-  async updateSchedule() {
+  updateSchedule = async () => {
     let res = await fetch(getApiUrl("calendars"));
     let body = await res.json();
     this.setState({ events: body.events });
-  }
+  };
 
   componentDidMount() {
     this.updateSchedule();
+    setInterval(this.updateSchedule, 15 * 1000);
   }
 
   renderEvent(event) {

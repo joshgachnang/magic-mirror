@@ -6,20 +6,17 @@ function pickRandom(list) {
 }
 
 export class Quote extends Component {
-  constructor() {
-    super();
-    this.state = { quotes: [] };
-    setInterval(() => this.updateQuotes.bind(this), 15000);
-  }
+  state = { quotes: [] };
 
-  async updateQuotes() {
+  updateQuotes = async () => {
     let res = await fetch(getApiUrl("inspirationalQuote"));
     let body = await res.json();
     this.setState({ quotes: body.quotes, quote: pickRandom(body.quotes) });
-  }
+  };
 
   componentDidMount() {
     this.updateQuotes();
+    setInterval(this.updateQuotes, 15 * 1000);
   }
 
   render() {

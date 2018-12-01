@@ -9,20 +9,18 @@ function pickRandom(list) {
 }
 
 export class Forecast extends Component {
-  constructor() {
-    super();
-    this.state = { forecast: {} };
-    setInterval(() => this.updateForecast.bind(this), 15000);
-  }
+  state = { forecast: {} };
 
-  async updateForecast() {
+  updateForecast = async () => {
     let res = await fetch(getApiUrl("forecastio"));
     let body = await res.json();
     this.setState({ forecast: body });
-  }
+    console.log(body);
+  };
 
   componentDidMount() {
     this.updateForecast();
+    setInterval(this.updateForecast, 15 * 1000);
   }
 
   getWeatherIcon(weather, time) {

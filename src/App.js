@@ -7,7 +7,6 @@ import { Forecast } from "./forecastio/forecastio";
 import { Calendar } from "./calendar/calendar";
 import { getApiUrl } from "./utils";
 
-// TODO: fetch from API
 const defaultLayout = {
   topLeft: ["Clock", "Quote"],
   topRight: ["Forecast"],
@@ -25,17 +24,18 @@ const Components = {
 };
 
 class App extends Component {
+  state = { layout: {} };
+
   constructor() {
     super();
-    this.state = { layout: {} };
   }
 
   componentDidMount() {
     this.updateLayout();
-    setTimeout(this.updateLayout.bind(this), 60 * 1000);
+    setInterval(this.updateLayout, 60 * 1000);
   }
 
-  async updateLayout() {
+  updateLayout = async () => {
     let layout;
     let apiUrl = getApiUrl("mirror/layout");
     if (window.location.search) {
@@ -54,7 +54,7 @@ class App extends Component {
       );
     }
     this.setState({ layout });
-  }
+  };
 
   renderStringsToComponent(strings) {
     if (!strings) {
