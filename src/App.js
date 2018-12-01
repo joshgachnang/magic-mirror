@@ -7,12 +7,13 @@ import { Forecast } from "./forecastio/forecastio";
 import { Calendar } from "./calendar/calendar";
 import { getApiUrl } from "./utils";
 import { Updater } from "./updater/updater";
+import { GooglePhotos } from "./googlePhotos/googlePhotos";
 
 const defaultLayout = {
   topLeft: ["Clock", "Quote"],
   topRight: ["Forecast"],
   // bottomLeft: ["CTA"],
-  bottomLeft: [],
+  bottomLeft: ["GooglePhotos"],
   bottomRight: ["Calendar"]
 };
 
@@ -21,7 +22,8 @@ const Components = {
   CTA,
   Calendar,
   Quote,
-  Forecast
+  Forecast,
+  GooglePhotos
 };
 
 class App extends Component {
