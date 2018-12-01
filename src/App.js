@@ -6,6 +6,7 @@ import { CTA } from "./cta/cta";
 import { Forecast } from "./forecastio/forecastio";
 import { Calendar } from "./calendar/calendar";
 import { getApiUrl } from "./utils";
+import { Updater } from "./updater/updater";
 
 const defaultLayout = {
   topLeft: ["Clock", "Quote"],
@@ -25,10 +26,6 @@ const Components = {
 
 class App extends Component {
   state = { layout: {} };
-
-  constructor() {
-    super();
-  }
 
   componentDidMount() {
     this.updateLayout();
@@ -71,6 +68,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Updater />
         <div className="topLeft">
           {this.renderStringsToComponent(this.state.layout.topLeft)}
         </div>
