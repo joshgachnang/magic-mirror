@@ -3,6 +3,7 @@ import * as moment from "moment";
 import "./forecastio.css";
 import "./weather-icons.min.css";
 import { getApiUrl } from "../utils";
+import * as Sentry from "@sentry/browser";
 
 function pickRandom(list) {
   return list[Math.floor(Math.random() * list.length)];
@@ -12,8 +13,15 @@ export class Forecast extends Component {
   state = { forecast: {} };
 
   updateForecast = async () => {
-    let res = await fetch(getApiUrl("forecastio"));
-    let body = await res.json();
+    let body;
+    try {
+      let res = await fetch(getApiUrl("forecastio"));
+      body = await res.json();
+    } catch (e) {
+      Sentry.captureException(e);
+      console.error(e);
+      return;
+    }
     this.setState({ forecast: body });
     console.log(body);
   };

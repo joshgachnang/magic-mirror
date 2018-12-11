@@ -17,5 +17,8 @@
     "eject": "react-scripts eject",
     "publish:pre": "rm magic-mirror-*.tgz && npm run build && npm pack",
     "publish": "npm run publish:pre && npm publish magic-mirror-*.tgz"
+  },
+  "dependencies": {
+    "@sentry/browser": "^4.4.1"
   }
 }

@@ -1,6 +1,7 @@
 // Fetch the latest mirror.nang.io webpage occasionally and if it's different, update.
 
 import React, { Component } from "react";
+import * as Sentry from "@sentry/browser";
 
 export class Updater extends Component {
   state = { etag: "" };
@@ -14,7 +15,14 @@ export class Updater extends Component {
       return;
     }
 
-    let res = await fetch(`https://${hostname}`);
+    let res;
+    try {
+      res = await fetch(`https://${hostname}`);
+    } catch (e) {
+      Sentry.captureException(e);
+      console.error(e);
+      return;
+    }
     let etag = res.headers.etag;
     if (this.state.etag !== "" && this.state.etag !== etag) {
       // New version! Update!

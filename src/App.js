@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import * as Sentry from "@sentry/browser";
 import { Clock } from "./clock/clock";
 import { Quote } from "./quote/quote";
 import { CTA } from "./cta/cta";
@@ -26,6 +27,10 @@ const Components = {
   GooglePhotos
 };
 
+Sentry.init({
+  dsn: "https://4d099a17ced34c88b1211aa0017acdbf@sentry.io/1341580"
+});
+
 class App extends Component {
   state = { layout: {} };
 
@@ -46,6 +51,7 @@ class App extends Component {
       layout = body.layout;
       console.info("[Using layout from server:", layout);
     } catch (e) {
+      Sentry.captureException(e);
       layout = defaultLayout;
       console.info(
         "Could not fetch layout from server, using default:",

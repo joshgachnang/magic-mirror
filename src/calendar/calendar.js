@@ -2,13 +2,21 @@ import React, { Component } from "react";
 import * as moment from "moment";
 import { getApiUrl } from "../utils";
 import "./calendar.css";
+import * as Sentry from "@sentry/browser";
 
 export class Calendar extends Component {
   state = { events: [] };
 
   updateSchedule = async () => {
-    let res = await fetch(getApiUrl("calendars"));
-    let body = await res.json();
+    let body;
+    try {
+      let res = await fetch(getApiUrl("calendars"));
+      body = await res.json();
+    } catch (e) {
+      Sentry.captureException(e);
+      console.error(e);
+      return;
+    }
     this.setState({ events: body.events });
   };
 
