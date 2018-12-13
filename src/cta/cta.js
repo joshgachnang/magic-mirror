@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import * as moment from "moment";
 import { getApiUrl } from "../utils";
-import * as Sentry from "@sentry/browser";
 import "./cta.css";
 
 export class CTA extends Component {
@@ -17,8 +16,7 @@ export class CTA extends Component {
       let res = await fetch(getApiUrl("cta"));
       body = await res.json();
     } catch (e) {
-      Sentry.captureException(e);
-      console.error(e);
+      console.warn("Failed to update schedule", e);
       return;
     }
     let trains = {};

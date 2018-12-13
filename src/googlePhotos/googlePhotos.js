@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { getApiUrl } from "../utils";
-import * as Sentry from "@sentry/browser";
 
-function pickRandom(list) {
-  return list[Math.floor(Math.random() * list.length)];
-}
+// function pickRandom(list) {
+//   return list[Math.floor(Math.random() * list.length)];
+// }
 
 export class GooglePhotos extends Component {
   state = { photo: [] };
@@ -15,8 +14,7 @@ export class GooglePhotos extends Component {
       let res = await fetch(getApiUrl("google/randomPhoto"));
       body = await res.json();
     } catch (e) {
-      Sentry.captureException(e);
-      console.error(e);
+      console.warn("Failed to update photos", e);
       return;
     }
     this.setState({ photo: body.photo });
@@ -38,7 +36,7 @@ export class GooglePhotos extends Component {
           maxHeight: "50%"
         }}
       >
-        <img src={this.state.photo} />
+        <img src={this.state.photo} alt="random googlephoto" />
       </div>
     );
   }

@@ -49,14 +49,11 @@ class App extends Component {
       let resp = await fetch(apiUrl);
       let body = await resp.json();
       layout = body.layout;
-      console.info("[Using layout from server:", layout);
+      console.info("Using layout from server:", layout);
     } catch (e) {
-      Sentry.captureException(e);
       layout = defaultLayout;
-      console.info(
-        "Could not fetch layout from server, using default:",
-        defaultLayout
-      );
+      console.warn("Could not fetch layout from server, using default:", e);
+      console.info("Using default layout", layout);
     }
     this.setState({ layout });
   };

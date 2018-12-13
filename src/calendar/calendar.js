@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import * as moment from "moment";
 import { getApiUrl } from "../utils";
 import "./calendar.css";
-import * as Sentry from "@sentry/browser";
 
 export class Calendar extends Component {
   state = { events: [] };
@@ -13,8 +12,7 @@ export class Calendar extends Component {
       let res = await fetch(getApiUrl("calendars"));
       body = await res.json();
     } catch (e) {
-      Sentry.captureException(e);
-      console.error(e);
+      console.warn("Failed to update schedule", e);
       return;
     }
     this.setState({ events: body.events });
@@ -38,7 +36,9 @@ export class Calendar extends Component {
 
   render() {
     return (
-      <div className="calendar">{this.state.events.map(this.renderEvent)}</div>
+      <div className="calendar">
+        {this.state.events && this.state.events.map(this.renderEvent)}
+      </div>
     );
   }
 }
