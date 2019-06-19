@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import * as Sentry from "@sentry/browser";
 import * as moment from "moment";
+import React, { Component } from "react";
 import "./clock.css";
 
 export class Clock extends Component {
@@ -7,6 +8,10 @@ export class Clock extends Component {
     super();
     this.state = { start: new Date(), time: new Date() };
     setInterval(() => this.setTime(), 1000);
+  }
+
+  componentDidCatch(error, errorInfo) {
+    Sentry.captureException(error, { extra: errorInfo });
   }
 
   // TODO: account for skew using this.state.start

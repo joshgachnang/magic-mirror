@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import * as Sentry from "@sentry/browser";
 import * as moment from "moment";
+import React, { Component } from "react";
+import { getApiUrl } from "../utils";
 import "./forecastio.css";
 import "./weather-icons.min.css";
-import { getApiUrl } from "../utils";
 
 function pickRandom(list) {
   return list[Math.floor(Math.random() * list.length)];
@@ -26,6 +27,10 @@ export class Forecast extends Component {
   componentDidMount() {
     this.updateForecast();
     setInterval(this.updateForecast, 15 * 1000);
+  }
+
+  componentDidCatch(error, errorInfo) {
+    Sentry.captureException(error, { extra: errorInfo });
   }
 
   getWeatherIcon(weather, time) {

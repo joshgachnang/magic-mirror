@@ -1,3 +1,4 @@
+import * as Sentry from "@sentry/browser";
 import React, { Component } from "react";
 import { getApiUrl } from "../utils";
 
@@ -7,6 +8,15 @@ function pickRandom(list) {
 
 export class Quote extends Component {
   state = { quotes: [] };
+
+  componentDidMount() {
+    this.updateQuotes();
+    setInterval(this.updateQuotes, 15 * 1000);
+  }
+
+  componentDidCatch(error, errorInfo) {
+    Sentry.captureException(error, { extra: errorInfo });
+  }
 
   updateQuotes = async () => {
     let body;
@@ -19,11 +29,6 @@ export class Quote extends Component {
     }
     this.setState({ quotes: body.quotes, quote: pickRandom(body.quotes) });
   };
-
-  componentDidMount() {
-    this.updateQuotes();
-    setInterval(this.updateQuotes, 15 * 1000);
-  }
 
   render() {
     return <div className="quote">{this.state.quote}</div>;

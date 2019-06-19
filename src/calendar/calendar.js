@@ -1,10 +1,20 @@
-import React, { Component } from "react";
+import * as Sentry from "@sentry/browser";
 import * as moment from "moment";
+import React, { Component } from "react";
 import { getApiUrl } from "../utils";
 import "./calendar.css";
 
 export class Calendar extends Component {
   state = { events: [] };
+
+  componentDidMount() {
+    this.updateSchedule();
+    setInterval(this.updateSchedule, 15 * 1000);
+  }
+
+  componentDidCatch(error, errorInfo) {
+    Sentry.captureException(error, { extra: errorInfo });
+  }
 
   updateSchedule = async () => {
     let body;
@@ -17,11 +27,6 @@ export class Calendar extends Component {
     }
     this.setState({ events: body.events });
   };
-
-  componentDidMount() {
-    this.updateSchedule();
-    setInterval(this.updateSchedule, 15 * 1000);
-  }
 
   renderEvent(event) {
     return (

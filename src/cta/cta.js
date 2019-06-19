@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import * as Sentry from "@sentry/browser";
 import * as moment from "moment";
+import React, { Component } from "react";
 import { getApiUrl } from "../utils";
 import "./cta.css";
 
@@ -31,6 +32,10 @@ export class CTA extends Component {
 
   componentDidMount() {
     this.updateSchedule();
+  }
+
+  componentDidCatch(error, errorInfo) {
+    Sentry.captureException(error, { extra: errorInfo });
   }
 
   renderTrain(dest) {

@@ -1,9 +1,18 @@
 // Fetch the latest mirror.nang.io webpage occasionally and if it's different, update.
 
+import * as Sentry from "@sentry/browser";
 import React, { Component } from "react";
 
 export class Updater extends Component {
   state = { etag: "" };
+
+  componentDidMount() {
+    setInterval(this.checkForUpdate, 5 * 1000);
+  }
+
+  componentDidCatch(error, errorInfo) {
+    Sentry.captureException(error, { extra: errorInfo });
+  }
 
   checkForUpdate = async () => {
     const hostname = window.location.hostname;
@@ -29,10 +38,6 @@ export class Updater extends Component {
       this.setState({ etag });
     }
   };
-
-  componentDidMount() {
-    setInterval(this.checkForUpdate, 5 * 1000);
-  }
 
   render() {
     return <div className="quote">{this.state.quote}</div>;

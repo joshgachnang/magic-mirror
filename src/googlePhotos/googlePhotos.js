@@ -1,3 +1,4 @@
+import * as Sentry from "@sentry/browser";
 import React, { Component } from "react";
 import { getApiUrl } from "../utils";
 
@@ -25,6 +26,10 @@ export class GooglePhotos extends Component {
     setInterval(this.updatePhoto, 5 * 60 * 1000);
   }
 
+  componentDidCatch(error, errorInfo) {
+    Sentry.captureException(error, { extra: errorInfo });
+  }
+
   render() {
     if (!this.state.photo) {
       return null;
@@ -36,7 +41,7 @@ export class GooglePhotos extends Component {
           maxHeight: "50%"
         }}
       >
-        <img src={this.state.photo} alt="random googlephoto" />
+        {this.state.photo && <img src={this.state.photo} />}
       </div>
     );
   }
